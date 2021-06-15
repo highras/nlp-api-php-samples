@@ -63,6 +63,7 @@ class SpeechRecognizeClient {
 	        "X-TimeStamp: {$timeStamp}",
             "Authorization: {$signature}",
             "Content-Type: application/json",
+            "Expect:",
         );
         //print_r($_header);
         $curl = curl_init();
@@ -77,6 +78,10 @@ class SpeechRecognizeClient {
 
         $response['result'] = curl_exec($curl);
         $response['code'] = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($curl)) {
+            echo 'Curl error: ' . curl_errno($curl)  . " : " . curl_error($curl);
+        }
 
         curl_close($curl);
         unset($curl);

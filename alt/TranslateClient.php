@@ -61,6 +61,7 @@ class TranslateClient {
             'Cache-Control: no-cache',
             "Authorization: {$signature}",
             "Content-Type: application/x-www-form-urlencoded;charset='utf-8'",
+            "Expect:",
         );
 
         $curl = curl_init();
@@ -75,6 +76,10 @@ class TranslateClient {
 
         $response['result'] = curl_exec($curl);
         $response['code'] = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if (curl_errno($curl)) {
+            echo 'Curl error: ' . curl_errno($curl)  . " : " . curl_error($curl);
+        }
 
         curl_close($curl);
         unset($curl);
