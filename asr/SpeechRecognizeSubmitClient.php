@@ -60,13 +60,10 @@ class SpeechRecognizeSubmitClient {
 
     private function request($body, $signature, $timeStamp) {
         $_header = array(
-            'Connection: Keep-Alive',
-            'Cache-Control: no-cache',
             "X-AppId: " . self::PROJECT_ID,
 	        "X-TimeStamp: {$timeStamp}",
             "Authorization: {$signature}",
             "Content-Type: application/json",
-            "Expect:",
         );
         //print_r($_header);
         $curl = curl_init();
@@ -93,8 +90,5 @@ class SpeechRecognizeSubmitClient {
 }
 
 $speech = new SpeechRecognizeSubmitClient();
-$audioUrl = 'https://rcs-us-west-2.s3.us-west-2.amazonaws.com/test.wav';
+$audioUrl = 'https://asafe-ap-beijing-1306922583.cos.ap-beijing.myqcloud.com/7days/rcs/audio/80800001/2023/09/12/nx_6e79f7ee-15ae-467b-a802-49d29088edff_1694483427844/0d11ee00a83840569ced9c023aeb21af?q-sign-algorithm=sha1&q-ak=AKIDpgSI43vd8QjwyxpUzPisjqyyxmsshKm2&q-sign-time=1694483429%3B1702259429&q-key-time=1694483429%3B1702259429&q-header-list=host&q-url-param-list=&q-signature=120c87948e6ad4630b0f39a043719afb7dbb337e';
 $speech->recognize($audioUrl, 'zh-CN', '12345678', TRUE);
-
-
-?>
