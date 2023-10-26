@@ -7,13 +7,12 @@ class LiveVideoCheckSubmitClient {
     const HOST = 'vsafe.ilivedata.com';
     const PATH = '/api/v1/livevideo/check/submit';
 
-    public function check($video, $type, $userId) {
+    public function check($video, $userId) {
         // UTC Time
         $nowDate = gmdate('Y-m-d\TH:i:s\Z');
 
         // Prepare parameters
         $params = array(
-            'type'             => $type,
             'video'             => $video,
             'userId'            => $userId,
         );
@@ -80,6 +79,6 @@ class LiveVideoCheckSubmitClient {
 
 $videochecksubmit = new LiveVideoCheckSubmitClient();
 $video = 'LIVE_VIDEO_URL';
-$videochecksubmit->check($video, 1, '12345678');
+$videochecksubmit->check($video, '12345678');
 
 ?>
